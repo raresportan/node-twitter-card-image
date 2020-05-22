@@ -1,0 +1,28 @@
+{
+  "name": "twitter-card-image",
+  "version": "1.0.0",
+  "description": "A small library that creates Twitter card images",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raresportan/node-twitter-card-image.git"
+  },
+  "keywords": [
+    "twitter",
+    "canvas",
+    "image",
+    "card"
+  ],
+  "dependencies": {
+    "canvas": "^2.6.1"
+  },
+  "author": "Rares Portan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raresportan/node-twitter-card-image/issues"
+  },
+  "homepage": "https://github.com/raresportan/node-twitter-card-image#readme"
+}
