@@ -128,7 +128,7 @@ async function makeCard({
             createGradient(ctx, roundedBorder.gradient, 0, 0, WIDTH, HEIGHT);
         }
 
-        let x = roundedBorder.width, y = roundedBorder.width, w = WIDTH - 2 * x, h = HEIGHT - 2 * y, r = roundedBorder.radius;
+        let x = roundedBorder.width || 0, y = roundedBorder.width || 0, w = WIDTH - 2 * x, h = HEIGHT - 2 * y, r = roundedBorder.radius || 0;
         createRoundRectPath(ctx, x, y, w, h, r)
     }
 
