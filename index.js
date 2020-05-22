@@ -201,17 +201,20 @@ async function makeCard({
 
     // output 
 
-    if (!output) output = 'test.jpeg';
-    const stream = /.png$/i.test(output)
-        ? canvas.createPNGStream()
-        : canvas.createJPEGStream({
-            quality: 0.95,
-            chromaSubsampling: false
-        })
+    return new Promise((resolve, reject) => {
+        if (!output) output = 'test.jpeg';
+        const stream = /.png$/i.test(output)
+            ? canvas.createPNGStream()
+            : canvas.createJPEGStream({
+                quality: 0.95,
+                chromaSubsampling: false
+            })
 
-    const out = fs.createWriteStream('./' + output)
-    stream.pipe(out)
-    out.on('finish', () => console.log(`${output} image was created.`))
+        const out = fs.createWriteStream('./' + output)
+        stream.pipe(out)
+        out.on('finish', () => { resolve() })
+        stream.on('error', reject)
+    })
 
 }
 

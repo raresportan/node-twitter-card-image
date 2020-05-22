@@ -1,3 +1,4 @@
+const { loadImage, createCanvas } = require('canvas');
 const makeCard = require('../index');
 
 makeCard({
@@ -43,20 +44,21 @@ makeCard({
             },
         ],
         width: 20
-    },
-    // roundedBorder: {
-    //     color: 'red',
-    //     gradient: [
-    //         {
-    //             color: '#e66465',
-    //             stop: 0
-    //         },
-    //         {
-    //             color: '#9198e5',
-    //             stop: 50
-    //         },
-    //     ],
-    //     radius: 20,
-    //     width: 30
-    // }
-});
+    }
+}).then(x => {
+    loadImage('./expected.png').then(expected => {
+        loadImage('./card.png').then(actual => {
+            let expectedCtx = createCanvas(expected.width, expected.height).getContext('2d');
+            expectedCtx.drawImage(expected, 0, 0);
+            const expectedData = expectedCtx.getImageData(0, 0, expected.width, expected.height).data;
+
+            let actualCtx = createCanvas(actual.width, actual.height).getContext('2d');
+            actualCtx.drawImage(actual, 0, 0);
+            const actualData = expectedCtx.getImageData(0, 0, actual.width, actual.height).data;
+
+            if (String(expectedData) !== String(actualData)) {
+                throw new Error('Invalid image')
+            }
+        });
+    });
+})
