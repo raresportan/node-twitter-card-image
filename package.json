@@ -1,6 +1,6 @@
 {
   "name": "twitter-card-image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A small library that creates Twitter card images",
   "main": "index.js",
   "scripts": {
