@@ -80,10 +80,10 @@ function drawWrappedText(text, context, x, y, maxWidth, lineHeight) {
     }
     if (line) lines.push(line.trim());
 
-    // y will always be the center line
-    let fistLineY = - (lines.length * lineHeight) / 2 + lineHeight / 2;
+    const lineDiff = lineHeight - (lineHeight - textHeight) / 2;
+    let firstLineY = y - (lines.length * lineDiff) / 2
     for (let i = 0; i < lines.length; i++) {
-        context.fillText(lines[i], x, - textHeight + y + fistLineY + i * lineHeight + (lineHeight - textHeight) * i);
+        context.fillText(lines[i], x, firstLineY + i * lineDiff);
     }
 }
 
@@ -104,7 +104,8 @@ async function makeCard({
     borderTop,
     borderRight,
     borderBottom,
-    borderLeft
+    borderLeft,
+    guides
 }) {
 
     // load fonts before any drawing
@@ -186,6 +187,9 @@ async function makeCard({
         texts.forEach(aText => {
             ctx.fillStyle = aText.color;
             ctx.font = aText.font;
+            if (aText.x === 'center') {
+                ctx.textAlign = 'center';
+            }
 
             let metrics = {
                 width: 0,
@@ -193,16 +197,22 @@ async function makeCard({
             if (aText.x === 'center' || aText.y === 'center') {
                 metrics = ctx.measureText(aText.text);
             }
-            const x = aText.x === 'center' ? WIDTH / 2 - metrics.width / 2 : aText.x;
+            const x = aText.x === 'center' ? WIDTH / 2 : aText.x;
             const y = aText.y === 'center' ? HEIGHT / 2 : aText.y;
             drawWrappedText(aText.text, ctx, x, y, aText.maxWidth || 700, aText.lineHeight || 20)
         })
     }
 
+    if (guides) {
+        ctx.fillStyle = 'lime';
+        ctx.fillRect(0, HEIGHT / 2, WIDTH, 1)
+        ctx.fillRect(WIDTH / 2, 0, 1, HEIGHT)
+    }
+
     // output 
 
     return new Promise((resolve, reject) => {
-        if (!output) output = 'test.jpeg';
+        if (!output) output = './test.jpeg';
         const stream = /.png$/i.test(output)
             ? canvas.createPNGStream()
             : canvas.createJPEGStream({
@@ -210,7 +220,8 @@ async function makeCard({
                 chromaSubsampling: false
             })
 
-        const out = fs.createWriteStream('./' + output)
+        console.log('Create ', output)
+        const out = fs.createWriteStream(output)
         stream.pipe(out)
         out.on('finish', () => { resolve() })
         stream.on('error', reject)
