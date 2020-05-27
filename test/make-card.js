@@ -8,7 +8,7 @@ makeCard({
     templateImage: './twitter-card-template.png',
     fonts: [
         {
-            file: 'Roboto-Bold.ttf',
+            file: './Roboto-Bold.ttf',
             family: 'Roboto'
         }
     ],

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <script src="./twittercard.js"></script>
+</head>
+
+<body>
+    <div style="width: 600px; height: 345px;">
+        <canvas id='cnvs' width="1200" height="669" style="transform: scale(.5) translate(-600px, -345px);"></canvas>
+    </div>
+    <script>
+        const drawCard = window.twittercard;
+
+        const canvas = document.getElementById('cnvs');
+        const context = canvas.getContext('2d');
+
+        drawCard(context, {
+            width: canvas.offsetWidth,
+            height: canvas.offsetHeight,
+            texts: [
+                {
+                    text: 'Will Grizzly Bears Survive Being Hunted?',
+                    font: '84px "Roboto"',
+                    x: 'center',
+                    y: 'center',
+                    color: '#fff',
+                    maxWidth: 700,
+                    lineHeight: 104
+                },
+            ],
+            backgroundColor: 'crimson',
+        })
+
+        function download() {
+            var link = document.createElement('a');
+            link.download = 'twittercard.jpg';
+            link.href = canvas.toDataURL("image/jpeg")
+            link.click();
+        }
+    </script>
+
+    <button onclick="download()">Download</button>
+</body>
+
+</html>
