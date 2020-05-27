@@ -62,10 +62,9 @@ async function makeCard({
                 chromaSubsampling: false
             })
 
-        console.log('Create ', output)
         const out = fs.createWriteStream(output)
         stream.pipe(out)
-        out.on('finish', () => { resolve() })
+        out.on('finish', () => { resolve(`${output} created`) })
         stream.on('error', reject)
     })
 
