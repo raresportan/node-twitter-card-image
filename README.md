@@ -1,5 +1,6 @@
 # node-twitter-card-image
 A small library that creates Twitter card images using `node-canvas`.
+It uses `tinypng` API to optimize the image if you provide an [API key](https://tinypng.com/developers)
 
 # Install
 ```
@@ -17,6 +18,7 @@ const makeCard = require('twitter-card-image');
 makeCard({
     width: 1280,
     height: 669,
+    tinypngApiKey: '',
     output: './card.png',
     templateImage: './twitter-card-template.png',
     fonts: [
@@ -77,6 +79,10 @@ The image height. Default 669.
 ```js
 height: 669
 ```
+
+## tinypngApiKey
+Your Tinypng API Key. You can get one for free [here.](https://tinypng.com/developers)
+Use this if you want to compress your images. Highly recommended.
 
 ## output
 The image name. Default test.jpeg

@@ -20,6 +20,7 @@ async function makeCard({
     borderRight,
     borderBottom,
     borderLeft,
+    tinypngApiKey,
     guides
 }) {
 
@@ -62,10 +63,19 @@ async function makeCard({
                 chromaSubsampling: false
             })
 
-        const out = fs.createWriteStream(output)
-        stream.pipe(out)
-        out.on('finish', () => { resolve(`${output} created`) })
-        stream.on('error', reject)
+        if (tinypngApiKey) {
+            const tinify = require("tinify");
+            tinify.key = tinypngApiKey;
+
+            const buffer = canvas.toBuffer(/.png$/i.test(output) ? 'image/png' : 'image/jpeg')
+            tinify.fromBuffer(buffer).toFile(output);
+        }
+        else {
+            const out = fs.createWriteStream(output)
+            stream.pipe(out)
+            out.on('finish', () => { resolve(`${output} created`) })
+            stream.on('error', reject)
+        }
     })
 
 }

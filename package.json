@@ -1,11 +1,11 @@
 {
   "name": "twitter-card-image",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A small library that creates Twitter card images",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "files": [
     "src/draw.js",
@@ -22,7 +22,8 @@
     "card"
   ],
   "dependencies": {
-    "canvas": "^2.6.1"
+    "canvas": "^2.6.1",
+    "tinify": "^1.6.0-beta.2"
   },
   "author": "Rares Portan",
   "license": "MIT",
@@ -31,6 +32,7 @@
   },
   "homepage": "https://github.com/raresportan/node-twitter-card-image#readme",
   "devDependencies": {
+    "jest": "^26.0.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
