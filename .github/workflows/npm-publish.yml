@@ -42,7 +42,7 @@ jobs:
           node-version: 12
           registry-url: https://registry.npmjs.org/
       - run: yarn
-      - run: yarn publish-ci
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
 
@@ -57,6 +57,6 @@ jobs:
           registry-url: https://npm.pkg.github.com/     
           scope: '@raresportan'     
       - run: yarn
-      - run: yarn publish-ci
+      - run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
