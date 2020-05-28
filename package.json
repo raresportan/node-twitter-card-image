@@ -1,10 +1,11 @@
 {
   "name": "twitter-card-image",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A small library that creates Twitter card images",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode=production",
+    "publish-ci": "lerna publish from-package -y",
     "changeset": "changeset",
     "test": "jest"
   },
@@ -35,6 +36,7 @@
   "devDependencies": {
     "@changesets/cli": "^2.8.0",
     "jest": "^26.0.1",
+    "lerna": "^3.22.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
