@@ -64,11 +64,17 @@ async function makeCard({
             })
 
         if (tinypngApiKey) {
-            const tinify = require("tinify");
-            tinify.key = tinypngApiKey;
+            try {
+                const tinify = require("tinify");
+                tinify.key = tinypngApiKey;
 
-            const buffer = canvas.toBuffer(/.png$/i.test(output) ? 'image/png' : 'image/jpeg')
-            tinify.fromBuffer(buffer).toFile(output);
+                const buffer = canvas.toBuffer(/.png$/i.test(output) ? 'image/png' : 'image/jpeg')
+                tinify.fromBuffer(buffer).toFile(output);
+                resolve(`${output} created`)
+            }
+            catch (err) {
+                reject(err);
+            }
         }
         else {
             const out = fs.createWriteStream(output)
