@@ -36,6 +36,6 @@
     "@changesets/cli": "^2.24.3",
     "jest": "^26.0.1",
     "webpack": "^5.74.0",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^5.0.1"
   }
 }
